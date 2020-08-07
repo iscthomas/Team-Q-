@@ -13,26 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/home', 'PageController@home');
 
-Route::get('/games', function () {
-    return view('games');
-});
+Route::get('/games', 'PageController@games');
 
-Route::get('/groups', function () {
-    return view('groups');
-});
+Route::get('/groups', 'PageController@groups');
 
-Route::get('/scores', function () {
-    return view('scores');
-});
+Route::get('/scores', 'PageController@scores');
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/login', 'PageController@login');
 
-Route::get('/register', function () {
-    return view('register');
-});
+Route::get('/register', 'PageController@register');
