@@ -16,7 +16,7 @@
     <div class="container">
 
         <div class="page-header">
-            <h1>Update Product</h1>
+            <h1>Update Game</h1>
         </div>
 
         <?php
@@ -30,7 +30,7 @@
         // read current record's data
         try {
             // prepare select query
-            $query = "SELECT id, name, description, image FROM games WHERE id = ? LIMIT 0,1";
+            $query = "SELECT id, name, category, description, image FROM games WHERE id = ? LIMIT 0,1";
             $stmt = $con->prepare($query);
 
             // this is the first question mark
@@ -44,8 +44,9 @@
 
             // values to fill up our form
             $name = $row['name'];
+            $category = $row['category'];
             $description = $row['description'];
-            $price = $row['image'];
+            $image = $row['image'];
         }
 
         // show error
@@ -64,8 +65,8 @@
          // write update query
          // in this case, it seemed like we have so many fields to pass and 
          // it is better to label them and not use question marks
-         $query = "UPDATE products 
-                     SET name=:name, description=:description, image=:image
+         $query = "UPDATE games 
+                     SET name=:name, category=:category, description=:description, image=:image
                      WHERE id = :id";
   
          // prepare query for excecution
@@ -73,11 +74,13 @@
   
          // posted values
          $name=htmlspecialchars(strip_tags($_POST['name']));
+         $category=htmlspecialchars(strip_tags($_POST['category']));
          $description=htmlspecialchars(strip_tags($_POST['description']));
-         $price=htmlspecialchars(strip_tags($_POST['image']));
+         $image=htmlspecialchars(strip_tags($_POST['image']));
   
          // bind the parameters
          $stmt->bindParam(':name', $name);
+         $stmt->bindParam(':category', $category);
          $stmt->bindParam(':description', $description);
          $stmt->bindParam(':image', $image);
          $stmt->bindParam(':id', $id);
@@ -106,18 +109,22 @@
             <td><input type='text' name='name' value="<?php echo htmlspecialchars($name, ENT_QUOTES);  ?>" class='form-control' /></td>
         </tr>
         <tr>
+            <td>Category/Genre</td>
+            <td><input type='text' name='category' value="<?php echo htmlspecialchars($name, ENT_QUOTES);  ?>" class='form-control' /></td>
+        </tr>
+        <tr>
             <td>Description</td>
             <td><textarea name='description' class='form-control'><?php echo htmlspecialchars($description, ENT_QUOTES);  ?></textarea></td>
         </tr>
         <tr>
-            <td>Price</td>
-            <td><input type='file' name='image' value="<?php echo htmlspecialchars($price, ENT_QUOTES);  ?>" class='form-control' /></td>
+            <td>Image</td>
+            <td><input type='file' name='image' value="<?php echo htmlspecialchars($image, ENT_QUOTES);  ?>" class='form-control' /></td>
         </tr>
         <tr>
             <td></td>
             <td>
                 <input type='submit' value='Save Changes' class='btn btn-primary' />
-                <a href='index.php' class='btn btn-danger'>Back to read products</a>
+                <a href='gameadmin.blade.php' class='btn btn-danger'>Back to read games</a>
             </td>
         </tr>
     </table>

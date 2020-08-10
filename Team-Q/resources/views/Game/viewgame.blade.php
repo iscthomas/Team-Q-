@@ -17,7 +17,7 @@
     <div class="container">
 
         <div class="page-header">
-            <h1>Read Product</h1>
+            <h1>Read Game</h1>
         </div>
 
         <?php
@@ -31,7 +31,7 @@
         // read current record's data
         try {
             // prepare select query
-            $query = "SELECT id, name, description, image FROM games WHERE id = ? LIMIT 0,1";
+            $query = "SELECT id, name, category, description, image FROM games WHERE id = ? LIMIT 0,1";
             $stmt = $con->prepare($query);
 
             // this is the first question mark
@@ -45,8 +45,9 @@
 
             // values to fill up our form
             $name = $row['name'];
+            $category = $row['category'];
             $description = $row['description'];
-            $price = $row['image'];
+            $image = htmlspecialchars($row['image'], ENT_QUOTES);
         }
 
         // show error
@@ -62,17 +63,23 @@
                 <td><?php echo htmlspecialchars($name, ENT_QUOTES);  ?></td>
             </tr>
             <tr>
+                <td>Category/Genre</td>
+                <td><?php echo htmlspecialchars($description, ENT_QUOTES);  ?></td>
+            </tr>
+            <tr>
                 <td>Description</td>
                 <td><?php echo htmlspecialchars($description, ENT_QUOTES);  ?></td>
             </tr>
             <tr>
-                <td>Price</td>
-                <td><?php echo htmlspecialchars($price, ENT_QUOTES);  ?></td>
+                <td>Image</td>
+                <td>
+                    <?php echo $image ? "<img src='/Team-Q/public/images/games/{$image}' style='width:300px;' />" : "No image found.";  ?>
+                </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <a href='gameadmin.blade.php' class='btn btn-danger'>Back to view games</a>
+                    <a href='gameadmin.blade.php' class='btn btn-danger'>Back to View Games</a>
                 </td>
             </tr>
         </table>

@@ -50,7 +50,7 @@
         }
 
         // select all data
-        $query = "SELECT id, name, description, image FROM games ORDER BY id DESC";
+        $query = "SELECT id, name, category, description, image FROM games ORDER BY id DESC";
         $stmt = $con->prepare($query);
         $stmt->execute();
 
@@ -58,7 +58,7 @@
         $num = $stmt->rowCount();
 
         // link to create record form
-        echo "<a href='create.php' class='btn btn-primary m-b-1em'>Create New Product</a>";
+        echo "<a href='creategame.blade.php' class='btn btn-primary m-b-1em'>Add New Game</a>";
 
         //check if more than 0 record found
         if ($num > 0) {
@@ -69,6 +69,7 @@
             echo "<tr>";
             echo "<th>ID</th>";
             echo "<th>Name</th>";
+            echo "<th>Category/Genre</th>";
             echo "<th>Description</th>";
             echo "<th>Image</th>";
             echo "<th>Action</th>";
@@ -87,11 +88,12 @@
                 echo "<tr>";
                 echo "<td>{$id}</td>";
                 echo "<td>{$name}</td>";
+                echo "<td>{$category}</td>";
                 echo "<td>{$description}</td>";
-                echo "<td>${$image}</td>";
+                echo "<td>{$image}</td>";
                 echo "<td>";
                 // read one record 
-                echo "<a href='viewgame.blade.php?id={$id}' class='btn btn-info m-r-1em'>Read</a>";
+                echo "<a href='viewgame.blade.php?id={$id}' class='btn btn-info m-r-1em'>View</a>";
 
                 // we will use this links on next part of this post
                 echo "<a href='updategame.blade.php?id={$id}' class='btn btn-primary m-r-1em'>Edit</a>";
