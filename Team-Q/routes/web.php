@@ -21,7 +21,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('games','GameController');
- 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
