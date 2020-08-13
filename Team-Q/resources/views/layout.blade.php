@@ -13,12 +13,7 @@
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
                 margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
             }
 
             .flex-center {
@@ -53,8 +48,8 @@
             }
 
             .para > h3 {
-                font-size: 20px;
-                margin-top: 45%;
+                font-size: 1.2rem;
+                padding-top: 35%;
                 margin-bottom: 0;
                 margin-left: 90%;
             }
@@ -91,11 +86,11 @@
             }
 
             .gametile {
-                width: 245px;
+                width: 23%;
                 height: 400px;
                 background-color: whitesmoke;
                 margin-top: 20px;
-                margin-right: 20px;
+                margin-right: 2%;
                 float: left;
                 border-radius: 25px;
             }
@@ -109,6 +104,31 @@
                 border-radius: 25px;
             }
 
+            .playertitle {
+                padding-left: 12%;
+                color: #636b6f;
+            }
+
+            .playertile {
+                width: 31%;
+                height:350px;
+                background-color: whitesmoke;
+                margin-top: 20px;
+                margin-right: 2%;
+                float: left;
+                border-radius: 25px;
+            }
+
+            .playerimg {
+                padding-bottom: 10px;
+                padding-top: 10px;
+                width: 70%;
+                height: 60%;
+                display: block;
+                margin: 0 auto;
+                border-radius: 250px;
+            }
+
             .button {
                 background-color: #636b6f;
                 font-size: 15px;
@@ -118,7 +138,7 @@
                 line-height: 34px;
                 border-radius: 15px;
                 width: 40%;
-                height: 8%;
+                height: 30px;
             }
 
             .button > a {
