@@ -84,6 +84,8 @@
                     Laravel
                 </div>
 
+                <h1>{{ $highscore }}</h1>
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
@@ -93,10 +95,8 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                    <a href="/Team-Q-/Team-Q/public/highscores/test>test</a>
                 </div>
             </div>
         </div>
     </body>
 </html>
-

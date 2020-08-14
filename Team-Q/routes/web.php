@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+Route::get('/highscores', 'DatabaseController@showHighscores');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
