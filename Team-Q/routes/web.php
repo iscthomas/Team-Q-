@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/home', 'PageController@home');
 
-Auth::routes();
+Route::get('/games', 'PageController@games');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/groups', 'PageController@groups');
+
+Route::get('/scores', 'PageController@scores');
+
+Route::get('/login', 'PageController@login');
+
+Route::get('/register', 'PageController@register');
+
