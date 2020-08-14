@@ -35,20 +35,20 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>CAtegory/Genre:</strong>
-                <textarea class="form-control" style="height:150px" name="category" placeholder="Category/Genre"></textarea>
+                <strong>Category/Genre:</strong>
+                <textarea class="form-control" name="category" placeholder="Category/Genre" required></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Description"></textarea>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="Description" required></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <textarea class="form-control" style="height:150px" name="image" placeholder="Image"></textarea>
+                <textarea class="form-control" name="image" placeholder="Image" required></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

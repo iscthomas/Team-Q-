@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Create Game</h2>
+                <h2>View All Games</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('games.create') }}"> Create New Game</a>

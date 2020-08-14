@@ -31,25 +31,25 @@
          <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name">
+                <input type="text" name="name" class="form-control" value="{{ $game->name }}" required>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>CAtegory/Genre:</strong>
-                <textarea class="form-control" style="height:150px" name="category" placeholder="Category/Genre"></textarea>
+                <strong>Category/Genre:</strong>
+                <input type="text" class="form-control" name="category" value="{{ $game->category }}" required></input>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Description"></textarea>
+                <input type="text" class="form-control" style="height:150px" name="description" value="{{ $game->description }}" required></input>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <textarea class="form-control" style="height:150px" name="image" placeholder="Image"></textarea>
+                <input type="text" class="form-control" name="image" value="{{ $game->image }}" required></input>
             </div>
         </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
