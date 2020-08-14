@@ -24,3 +24,4 @@ Route::get('/scores', 'PageController@scores');
 Route::get('/login', 'PageController@login');
 
 Route::get('/register', 'PageController@register');
+
