@@ -49,7 +49,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <input type="text" class="form-control" name="image" value="{{ $game->image }}" required></input>
+                <input id="profile_image" type="file" class="form-control" value="{{ $game->image }}" name="image" required>
             </div>
         </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

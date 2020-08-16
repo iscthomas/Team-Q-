@@ -29,11 +29,11 @@
         </tr>
         @foreach ($games as $game)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $game->id }}</td>
             <td>{{ $game->name }}</td>
             <td>{{ $game->category }}</td>
             <td>{{ $game->description }}</td>
-            <td>{{ $game->image }}</td>
+            <td><img src="{{ $game->image }}" width="300"></td>
             <td>
                 <form action="{{ route('games.destroy',$game->id) }}" method="POST">
    

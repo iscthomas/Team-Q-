@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Traits\UploadTrait;
 
 class GameController extends Controller
 {
+    use UploadTrait;
+    // public function __construct() //will be used later for auth purposes
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -43,10 +50,26 @@ class GameController extends Controller
             'name' => 'required',
             'category' => 'required',
             'description' => 'required',
-            'image' => 'required'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        Game::create($request->all());
+        $game = Game::create($request->all());
+
+        // Check if an image has been uploaded
+        if ($request->has('image')) {
+            // Get image file
+            $image = $request->file('image');
+            // Make a image name based on game name and current timestamp
+            $name = Str::slug($request->input('name')) . '_' . time();
+            // Define folder path
+            $folder = '/uploads/images/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            // Upload image
+            $this->uploadOne($image, $folder, 'public', $name);
+            // Set game image path in database to filePath
+            $game->image = $filePath;
+        }
 
         return redirect()->route('games.index')
             ->with('success', 'Game created successfully.');
@@ -87,10 +110,26 @@ class GameController extends Controller
             'name' => 'required',
             'category' => 'required',
             'description' => 'required',
-            'image' => 'required'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $game->update($request->all());
+
+        // Check if an image has been uploaded
+        if ($request->has('image')) {
+            // Get image file
+            $image = $request->file('image');
+            // Make a image name based on game name and current timestamp
+            $name = Str::slug($request->input('name')) . '_' . time();
+            // Define folder path
+            $folder = '/uploads/images/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            // Upload image
+            $this->uploadOne($image, $folder, 'public', $name);
+            // Set game image path in database to filePath
+            $game->image = $filePath;
+        }
 
         return redirect()->route('games.index')
             ->with('success', 'Game updated successfully');
