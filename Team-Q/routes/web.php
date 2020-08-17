@@ -26,3 +26,8 @@ Route::get('/login', 'PageController@login');
 Route::get('/register', 'PageController@register');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//routes required for game crud features 
+Route::resource('games','GameController');
+// Route::get('/games', 'GameController@index')->name('games');
+Route::post('/games/create', 'GameController@store')->name('games.create');
