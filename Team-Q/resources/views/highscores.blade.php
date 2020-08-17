@@ -84,7 +84,20 @@
                     Laravel
                 </div>
 
-                <h1>{{ $highscore }}</h1>
+                <h1>Highscores for Games</h1>
+                <?php $dbdata = DB::table('highscores')->get();?>
+                
+                <h2>Highscores Leaderboard</h2>
+                @foreach($dbdata as $datadisplayed)
+                <div>
+                    
+                    <p>{{$datadisplayed->name}}</p>
+                    <p>{{$datadisplayed->highscore}}</p>
+    
+                </div>
+                @endforeach
+
+
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>

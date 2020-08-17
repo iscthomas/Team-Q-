@@ -18,10 +18,10 @@ Route::get('/', function () {
 });
 
 
-
-Route::get('/highscores', 'DatabaseController@showHighscores');
-
 Auth::routes();
 
+Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
  
