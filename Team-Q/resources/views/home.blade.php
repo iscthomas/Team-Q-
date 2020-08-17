@@ -57,7 +57,25 @@
 </div>
 <div class='flex-center'>
     <div class='para'>
-            <h2>Top Groups</h2>
+        <h2>Top Groups</h2>
+        <div class='grouptile'>
+            <h4 class = 'grouptitle' id='grouptitle1'>#1 Group Name Here</h4>
+            <img src = "images/placeholder.jpg" class='groupimg' id='groupimg1'>
+            <a href=''><div class='button'>View Group</div></a>
+            <div class='button' id='membercount1'>Members: 20</div>
+        </div>
+        <div class='grouptile'>
+            <h4 class = 'grouptitle' id='grouptitle2'>#2 Group Name Here</h4>
+            <img src = "images/placeholder.jpg" class='groupimg' id='groupimg2'>
+            <a href=''><div class='button'>View Group</div></a>
+            <div class='button' id='membercount2'>Members: 14</div>
+        </div>
+        <div class='grouptile'>
+            <h4 class = 'grouptitle' id='grouptitle3'>#3 Group Name Here</h4>
+            <img src = "images/placeholder.jpg" class='groupimg' id='groupimg3'>
+            <a href=''><div class='button'>View Group</div></a>
+            <div class='button' id='membercount3'>Members: 11</div>
+        </div>
     </div>
 </div>
 @endsection

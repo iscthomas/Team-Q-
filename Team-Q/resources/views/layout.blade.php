@@ -121,12 +121,36 @@
 
             .playerimg {
                 padding-bottom: 10px;
-                padding-top: 10px;
-                width: 70%;
+                padding-top: 15px;
+                width: 68%;
                 height: 60%;
                 display: block;
                 margin: 0 auto;
-                border-radius: 250px;
+                border-radius: 50%;
+            }
+
+            .groupimg {
+                padding-bottom: 25px;
+                width: 66%;
+                height: 57%;
+                display: block;
+                margin: 0 auto;
+                border-radius: 50%;
+            }
+
+            .grouptitle {
+                padding-left: 12%;
+                color: #636b6f;
+            }
+
+            .grouptile {
+                width: 30%;
+                height:350px;
+                background-color: whitesmoke;
+                margin-top: 20px;
+                margin-right: 3%;
+                float: left;
+                border-radius: 25px;
             }
 
             .button {
@@ -138,7 +162,7 @@
                 line-height: 34px;
                 border-radius: 15px;
                 width: 40%;
-                height: 30px;
+                height: 33px;
             }
 
             .button > a {
