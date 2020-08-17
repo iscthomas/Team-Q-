@@ -25,3 +25,4 @@ Route::get('/login', 'PageController@login');
 
 Route::get('/register', 'PageController@register');
 
+Route::get('/home', 'HomeController@index')->name('home');
