@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', 'PageController@home');
 
+Auth::routes();
+
+Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
+
 Route::get('/games', 'PageController@games');
 
 Route::get('/groups', 'PageController@groups');

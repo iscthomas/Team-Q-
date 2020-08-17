@@ -84,6 +84,21 @@
                     Laravel
                 </div>
 
+                <h1>Highscores for Games</h1>
+                <?php $dbdata = DB::table('highscores')->get();?>
+                
+                <h2>Highscores Leaderboard</h2>
+                @foreach($dbdata as $datadisplayed)
+                <div>
+                    
+                    <p>{{$datadisplayed->name}}</p>
+                    <p>{{$datadisplayed->highscore}}</p>
+    
+                </div>
+                @endforeach
+
+
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
@@ -93,10 +108,8 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                    <a href="http://team-q.test/highscores/test">High Scores Leaderboard</a>
                 </div>
             </div>
         </div>
     </body>
 </html>
-
