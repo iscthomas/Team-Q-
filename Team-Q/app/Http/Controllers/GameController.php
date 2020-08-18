@@ -10,10 +10,12 @@ use App\Traits\UploadTrait;
 class GameController extends Controller
 {
     use UploadTrait;
-    // public function __construct() //will be used later for auth purposes
-    // {
-    //     $this->middleware('auth');
-    // }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *

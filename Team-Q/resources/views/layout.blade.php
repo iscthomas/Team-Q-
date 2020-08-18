@@ -186,7 +186,6 @@
     </head>
     <body>
             <div class="content">
-                @yield('auth')
                 <div class="title m-b-md">
                     Name Pending
                 </div>
@@ -196,6 +195,21 @@
                     <a href="{{url('/games')}}">Games</a>
                     <a href="{{url('/groups')}}">Groups</a>
                     <a href="{{url('/scores')}}">Scores</a>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->first_name }} <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </div>
                 
                 @yield('content')
