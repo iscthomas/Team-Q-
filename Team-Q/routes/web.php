@@ -13,10 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
+
+Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
+
+Route::get('/games', 'PageController@games');
+
+Route::get('/groups', 'PageController@groups');
+
+Route::get('/scores', 'PageController@scores');
+
+//routes required for game crud features 
+Route::resource('games','GameController');
+
+Route::post('/games/create', 'GameController@store')->name('games.create');
