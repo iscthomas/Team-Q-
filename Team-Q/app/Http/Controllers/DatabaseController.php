@@ -10,8 +10,8 @@ class DatabaseController extends Controller
     {   
         // hardcoded data test
         $data = [
-            'test' => 'this is the first test highscore: 80%',
-            'test2' => 'this is the second test highscore: 89%'
+            'leaderboard' => '',
+            'test' => ''
         ];
 
         // dd($highscore);

@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -61,6 +60,32 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            /* leaderboard highscores */
+            .leaderboard-container{
+                border: 2px #000 solid;
+                background-color: #000;
+                color: #fff;
+                width 
+            }
+
+            .leaderboard-title{
+                font-size: 40px;
+            }
+
+            .leaderboard-inner{
+                border: 2px #fff solid;
+                margin: 50px;
+                padding: 10px 25px;
+                font-size: 1.5em;
+                
+            }
+
+            .leaderboard-legend{
+                text-transform: uppercase;
+                letter-spacing: 10px;
+            }
+
         </style>
     </head>
     <body>
@@ -78,22 +103,17 @@
                     @endauth
                 </div>
             @endif
-
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
 
-                <h1>Highscores for Games</h1>
                 <?php $dbdata = DB::table('highscores')->get();?>
                 
-                <h2>Highscores Leaderboard</h2>
-                @foreach($dbdata as $datadisplayed)
-                <div>
-                    
-                    <p>{{$datadisplayed->name}}</p>
-                    <p>{{$datadisplayed->highscore}}</p>
-    
+                <div class="leaderboard-container">
+                    <h2 class="leaderboard-title">Highscores Leaderboard</h2>
+                    @foreach($dbdata as $datadisplayed)
+                    <div class="leaderboard-inner">
+                        <p><span class="leaderboard-legend">Player Name:   </span>{{$datadisplayed->name}}</p>
+                        <p><span class="leaderboard-legend">Highscore:     </span>{{$datadisplayed->highscore}}</p>
+                    </div>
                 </div>
                 @endforeach
 
@@ -108,6 +128,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="http://team-q.test/highscores/leaderboard">High Scores Leaderboard</a>
                 </div>
             </div>
         </div>
