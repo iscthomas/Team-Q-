@@ -12,8 +12,8 @@ class AddConfirmationFieldsToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('confirmed_at')->nullable();
-            $table->string('confirmation_code')->nullable();
+            // $table->dateTime('confirmed_at')->nullable();
+            // $table->string('confirmation_code')->nullable();
         });
     }
 
