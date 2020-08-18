@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', 'PageController@home');
-
 Auth::routes();
+
+Route::get('/', 'HomeController@index');
 
 Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
 
@@ -25,11 +25,7 @@ Route::get('/groups', 'PageController@groups');
 
 Route::get('/scores', 'PageController@scores');
 
-Route::get('/login', 'PageController@login');
-
-Route::get('/register', 'PageController@register');
-
 //routes required for game crud features 
 Route::resource('games','GameController');
-// Route::get('/games', 'GameController@index')->name('games');
+
 Route::post('/games/create', 'GameController@store')->name('games.create');

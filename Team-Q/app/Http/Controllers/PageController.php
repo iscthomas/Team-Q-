@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    //
-    public function home()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        return view('home');
+        $this->middleware('auth');
     }
 
     public function games()
@@ -25,15 +29,5 @@ class PageController extends Controller
     public function scores()
     {
         return view('scores');
-    }
-
-    public function login()
-    {
-        return view('login');
-    }
-
-    public function register()
-    {
-        return view('register');
     }
 }
