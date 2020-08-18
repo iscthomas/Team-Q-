@@ -13,19 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('index')->middleware('verified');
 
-Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
+Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores')->middleware('verified');
 
-Route::get('/games', 'PageController@games');
+Route::get('/games', 'PageController@games')->middleware('verified');
 
-Route::get('/groups', 'PageController@groups');
+Route::get('/groups', 'PageController@groups')->middleware('verified');
 
-Route::get('/scores', 'PageController@scores');
+Route::get('/scores', 'PageController@scores')->middleware('verified');
 
 //routes required for game crud features 
-Route::resource('games','GameController');
+Route::resource('games','GameController')->middleware('verified');
 
-Route::post('/games/create', 'GameController@store')->name('games.create');
+Route::post('/games/create', 'GameController@store')->name('games.create')->middleware('verified');
+
+Route::name('auth.resend_confirmation')->get('/register/confirm/resend', 'Auth\RegisterController@resendConfirmation');
+
+Route::name('auth.confirm')->get('/register/confirm/{confirmation_code}', 'Auth\RegisterController@confirm'); 

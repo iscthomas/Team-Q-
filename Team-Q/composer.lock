@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a993688a4552c644071256b6b56c39a",
+    "content-hash": "72df7530a72e7aa25e0ff652161abfe8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -57,6 +57,65 @@
                 "stack"
             ],
             "time": "2019-12-24T22:41:47+00:00"
+        },
+        {
+            "name": "beyondcode/laravel-confirm-email",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beyondcode/laravel-confirm-email.git",
+                "reference": "26856e873ed64b59b7c64e1bb2dd8868e3797c47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beyondcode/laravel-confirm-email/zipball/26856e873ed64b59b7c64e1bb2dd8868e3797c47",
+                "reference": "26856e873ed64b59b7c64e1bb2dd8868e3797c47",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^7.0",
+                "illuminate/database": "^7.0",
+                "illuminate/notifications": "^7.0",
+                "illuminate/support": "^7.0",
+                "laravel/ui": "^2.0",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BeyondCode\\EmailConfirmation\\EmailConfirmationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BeyondCode\\EmailConfirmation\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "marcel@beyondco.de",
+                    "homepage": "https://beyondcode.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add email verification to your Laravel projects.",
+            "homepage": "https://github.com/beyondcode/laravel-confirm-email",
+            "keywords": [
+                "beyondcode",
+                "laravel-confirm-email"
+            ],
+            "time": "2020-07-02T09:22:23+00:00"
         },
         {
             "name": "brick/math",
@@ -5116,6 +5175,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
