@@ -14,8 +14,10 @@ class CreateGroupNamesTable extends Migration
     public function up()
     {
         Schema::create('group_names', function (Blueprint $table) {
-            $table->id();
-            $table->string('group_name');
+            $table->increments('id');
+            $table->string('group_name')->unique();
+            $table->string('description');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
