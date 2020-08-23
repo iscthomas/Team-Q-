@@ -20,8 +20,8 @@
    
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
-            <th>Group Title</th>
+            <th>ID</th>
+            <th>Group Name</th>
             <th>Description</th>
             <th>Image</th>
             <th width="280px">Action</th>
@@ -31,7 +31,7 @@
             <td>{{ $group->id }}</td>
             <td>{{ $group->group_name }}</td>
             <td>{{ $group->description }}</td>
-            <td><img src="{{ $group->image }}" width="300"></td>
+            <td><img src="{{ URL::to('/') }}{{ $group->image }}" style="max-height:200px"/></td>
             <td>
                 <form action="{{ route('groups.destroy',$group->id) }}" method="POST">
    

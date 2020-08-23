@@ -20,7 +20,7 @@
    
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+            <th>ID</th>
             <th>Game Title</th>
             <th>Category/Genre</th>
             <th>Description</th>
@@ -33,7 +33,7 @@
             <td>{{ $game->name }}</td>
             <td>{{ $game->category }}</td>
             <td>{{ $game->description }}</td>
-            <td><img src="{{ $game->image }}" width="300"></td>
+            <td><img src="{{ URL::to('/') }}{{ $game->image }}" style="max-height:200px"/></td>
             <td>
                 <form action="{{ route('games.destroy',$game->id) }}" method="POST">
    

@@ -63,7 +63,7 @@ class GroupController extends Controller
             // Make a image name based on group name and current timestamp
             $group_name = Str::slug($request->input('group_name')) . '_' . time();
             // Define folder path
-            $folder = '/uploads/images/';
+            $folder = '/images/groups/';
             // Make a file path where image will be stored [ folder path + file name + file extension]
             $filePath = $folder . $group_name . '.' . $image->getClientOriginalExtension();
             // Upload image
@@ -122,7 +122,7 @@ class GroupController extends Controller
             // Make a image name based on group name and current timestamp
             $group_name = Str::slug($request->input('group_name')) . '_' . time();
             // Define folder path
-            $folder = '/uploads/images/';
+            $folder = '/images/groups/';
             // Make a file path where image will be stored [ folder path + file name + file extension]
             $filePath = $folder . $group_name . '.' . $image->getClientOriginalExtension();
             // Upload image
@@ -130,6 +130,7 @@ class GroupController extends Controller
             // Set group image path in database to filePath
             $group->image = $filePath;
         }
+        $group->save();
 
         return redirect()->route('groups.index')
             ->with('success', 'Group updated successfully');
