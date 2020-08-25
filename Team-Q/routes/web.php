@@ -21,7 +21,7 @@ Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
 
 Route::get('/games', 'PageController@games');
 
-Route::get('/groups', 'PageController@groups');
+// Route::get('/groups', 'PageController@groups');
 
 Route::get('/scores', 'PageController@scores');
 
@@ -32,3 +32,5 @@ Route::post('/games/create', 'GameController@store')->name('games.create');
 //routes required for group crud features
 Route::resource('groups','GroupController');
 Route::post('/groups/create', 'GroupController@store')->name('groups.create');
+
+Route::get('/join', 'GroupController@join');

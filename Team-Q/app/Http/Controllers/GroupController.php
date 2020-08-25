@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -134,6 +136,17 @@ class GroupController extends Controller
 
         return redirect()->route('groups.index')
             ->with('success', 'Group updated successfully');
+    }
+
+    public function join(Group $group) {
+
+        $user_id = auth()->user()->id();
+        $group_id = $group->id();
+        
+        dd("Group-id = " . $group_id . ". User-id = " . $user_id);
+
+        return redirect()->route('groups.index')
+        ->with('success', 'You have been added to the group successfully');
     }
 
     /**

@@ -38,6 +38,9 @@
                     <a class="btn btn-info" href="{{ route('groups.show',$group->id) }}">Show</a>
     
                     <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a>
+
+                    <a class="btn btn-warning" href="{{ url('/join') }}">Join</a>
+                    <a class="btn btn-warning" href="{{ url('/join', $group->id) }}">Join</a>
    
                     @csrf
                     @method('DELETE')
