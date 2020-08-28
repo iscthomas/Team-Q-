@@ -33,4 +33,4 @@ Route::post('/games/create', 'GameController@store')->name('games.create');
 Route::resource('groups','GroupController');
 Route::post('/groups/create', 'GroupController@store')->name('groups.create');
 
-Route::get('/join', 'GroupController@join');
+Route::get('/join/{group}', 'GroupController@join');

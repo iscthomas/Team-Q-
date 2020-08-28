@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Groups;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Traits\UploadTrait;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class GroupController extends Controller
 {
@@ -140,9 +142,27 @@ class GroupController extends Controller
 
     public function join(Group $group) {
 
-        $user_id = auth()->user()->id();
-        $group_id = $group->id();
+        $user_id = request()->user()->id;
+        #$user_id = auth()->user()->id();
+        $group_id = $group->id;
         
+        $created_at = Carbon::now()->toDateTimeString();
+        $updated_at = Carbon::now()->toDateTimeString();
+
+        $data = [ $group_id, $user_id, null, $created_at, $updated_at];
+
+        Validator::make($data, [
+            'group_id' => ['required', 'int', 'max:6'],
+            'user_id' => ['required', 'int', 'max:6'],
+            'user_highscore' => ['required', 'int', 'max:20'],
+        ]);
+
+        Groups::create([
+            'group_id' => $data[0],
+            'user_id' => $data[1],
+            'user_highscore' => $data[2],
+        ]);
+
         dd("Group-id = " . $group_id . ". User-id = " . $user_id);
 
         return redirect()->route('groups.index')
