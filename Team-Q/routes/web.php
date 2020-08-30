@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
+Route::any('/highscores/{highscore}', 'DatabaseController@showHighscores');
 
 Route::get('/games', 'PageController@games');
 
