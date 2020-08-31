@@ -65,14 +65,13 @@ class GameController extends Controller
             $name = Str::slug($request->input('name')) . '_' . time();
             // Define folder path
             $folder = '/images/games/';
-            // Make a file path where image will be stored [ folder path + file name + file extension]
+            // Make a file path where image will be stored [folder path + file name + file extension]
             $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
             // Upload image
             $this->uploadOne($image, $folder, 'public', $name);
             // Set game image path in database to filePath
             $game->image = $filePath;
         }
-
         return redirect()->route('games.index')
             ->with('success', 'Game created successfully.');
     }
