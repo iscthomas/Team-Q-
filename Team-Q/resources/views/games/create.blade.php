@@ -48,7 +48,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image (Max 2MB):</strong>
-                <input id="image" type="file" class="form-control" name="image" required>
+                <input id="profile_image" type="file" class="form-control" name="image" required>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
