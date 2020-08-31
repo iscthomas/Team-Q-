@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -33,3 +34,4 @@ class CreateGamesTable extends Migration
         Schema::dropIfExists('games');
     }
 }
+

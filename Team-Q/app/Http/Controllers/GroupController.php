@@ -23,10 +23,11 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+
         $groups = Group::latest()->paginate(5);
 
-        return view('groups.index', compact('groups', 'user'))
+        return view('groups.index', compact('groups'))
+
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -135,17 +136,6 @@ class GroupController extends Controller
 
         return redirect()->route('groups.index')
             ->with('success', 'Group updated successfully');
-    }
-
-    public function join(Group $group, User $user) {
-
-        $group_id = $group->id();
-        $user_id = $user->id();
-        
-        dd("Group-id = " . $group_id . ". User-id = " . $user_id);
-
-        return redirect()->route('groups.index')
-        ->with('success', 'You have been added to the group successfully');
     }
 
     /**

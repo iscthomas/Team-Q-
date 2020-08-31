@@ -94,7 +94,7 @@
                 text-decoration: none;
                 color: var(--cblue);
             }
-
+            
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -177,6 +177,7 @@
             }
 
             .groupimg {
+
                 padding-bottom: 1vh;
                 padding-top: 1vh;
                 width: 13vw;
@@ -230,6 +231,7 @@
 
             .disp-button {
                 background-color: rgba(0, 172, 238, 0.3);
+
             }
         </style>
 
@@ -265,6 +267,7 @@
                         {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
+
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
@@ -277,6 +280,7 @@
                     </div>
                 </div>
                 </div>
+
                 
                 @yield('content')
             </div>
