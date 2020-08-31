@@ -36,3 +36,4 @@ Route::post('/games/create', 'GameController@store')->name('games.create')->midd
 //routes required for group crud features
 Route::resource('groups','GroupController');
 Route::post('/groups/create', 'GroupController@store')->name('groups.create')->middleware('verified');
+

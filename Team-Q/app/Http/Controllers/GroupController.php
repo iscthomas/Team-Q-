@@ -23,9 +23,11 @@ class GroupController extends Controller
      */
     public function index()
     {
+
         $groups = Group::latest()->paginate(5);
 
         return view('groups.index', compact('groups'))
+
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
