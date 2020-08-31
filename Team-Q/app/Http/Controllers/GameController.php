@@ -64,7 +64,7 @@ class GameController extends Controller
             // Make a image name based on game name and current timestamp
             $name = Str::slug($request->input('name')) . '_' . time();
             // Define folder path
-            $folder = '/uploads/images/';
+            $folder = '/images/games/';
             // Make a file path where image will be stored [ folder path + file name + file extension]
             $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
             // Upload image
@@ -72,7 +72,6 @@ class GameController extends Controller
             // Set game image path in database to filePath
             $game->image = $filePath;
         }
-
         return redirect()->route('games.index')
             ->with('success', 'Game created successfully.');
     }
@@ -124,7 +123,7 @@ class GameController extends Controller
             // Make a image name based on game name and current timestamp
             $name = Str::slug($request->input('name')) . '_' . time();
             // Define folder path
-            $folder = '/uploads/images/';
+            $folder = '/images/games/';
             // Make a file path where image will be stored [ folder path + file name + file extension]
             $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
             // Upload image
@@ -132,6 +131,8 @@ class GameController extends Controller
             // Set game image path in database to filePath
             $game->image = $filePath;
         }
+
+        $game->save();
 
         return redirect()->route('games.index')
             ->with('success', 'Game updated successfully');
