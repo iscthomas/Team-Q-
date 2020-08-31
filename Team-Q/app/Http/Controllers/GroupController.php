@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Game;
+use App\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Traits\UploadTrait;
 
-class GameController extends Controller
+class GroupController extends Controller
 {
     use UploadTrait;
 
@@ -23,9 +23,9 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::latest()->paginate(5);
+        $groups = Group::latest()->paginate(5);
 
-        return view('games.index', compact('games'))
+        return view('groups.index', compact('groups'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -36,7 +36,7 @@ class GameController extends Controller
      */
     public function create()
     {
-        return view('games.create');
+        return view('groups.create');
     }
 
     /**
@@ -49,105 +49,104 @@ class GameController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'category' => 'required',
+            'group_name' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $game = Game::create($request->all());
+        $group = Group::create($request->all());
 
         // Check if an image has been uploaded
         if ($request->has('image')) {
             // Get image file
             $image = $request->file('image');
-            // Make a image name based on game name and current timestamp
-            $name = Str::slug($request->input('name')) . '_' . time();
+            // Make a image name based on group name and current timestamp
+            $group_name = Str::slug($request->input('group_name')) . '_' . time();
             // Define folder path
-            $folder = '/images/games/';
-            // Make a file path where image will be stored [folder path + file name + file extension]
-            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            $folder = '/images/groups/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $group_name . '.' . $image->getClientOriginalExtension();
             // Upload image
-            $this->uploadOne($image, $folder, 'public', $name);
-            // Set game image path in database to filePath
-            $game->image = $filePath;
+            $this->uploadOne($image, $folder, 'public', $group_name);
+            // Set group image path in database to filePath
+            $group->image = $filePath;
         }
-        return redirect()->route('games.index')
-            ->with('success', 'Game created successfully.');
+
+        return redirect()->route('groups.index')
+            ->with('success', 'Group created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Game  $game
+     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show(Group $group)
     {
-        return view('games.show', compact('game'));
+        return view('groups.show', compact('group'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Game  $game
+     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function edit(Game $game)
+    public function edit(Group $group)
     {
-        return view('games.edit', compact('game'));
+        return view('groups.edit', compact('group'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Game  $game
+     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(Request $request, Group $group)
     {
         $request->validate([
-            'name' => 'required',
-            'category' => 'required',
+            'group_name' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $game->update($request->all());
+        $group->update($request->all());
 
         // Check if an image has been uploaded
         if ($request->has('image')) {
             // Get image file
             $image = $request->file('image');
-            // Make a image name based on game name and current timestamp
-            $name = Str::slug($request->input('name')) . '_' . time();
+            // Make a image name based on group name and current timestamp
+            $group_name = Str::slug($request->input('group_name')) . '_' . time();
             // Define folder path
-            $folder = '/images/games/';
+            $folder = '/images/groups/';
             // Make a file path where image will be stored [ folder path + file name + file extension]
-            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            $filePath = $folder . $group_name . '.' . $image->getClientOriginalExtension();
             // Upload image
-            $this->uploadOne($image, $folder, 'public', $name);
-            // Set game image path in database to filePath
-            $game->image = $filePath;
+            $this->uploadOne($image, $folder, 'public', $group_name);
+            // Set group image path in database to filePath
+            $group->image = $filePath;
         }
-        $game->save();
+        $group->save();
 
-        return redirect()->route('games.index')
-            ->with('success', 'Game updated successfully');
+        return redirect()->route('groups.index')
+            ->with('success', 'Group updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Game  $game
+     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game)
+    public function destroy(Group $group)
     {
-        $game->delete();
+        $group->delete();
 
-        return redirect()->route('games.index')
-            ->with('success', 'Game deleted successfully');
+        return redirect()->route('groups.index')
+            ->with('success', 'Group deleted successfully');
     }
 }

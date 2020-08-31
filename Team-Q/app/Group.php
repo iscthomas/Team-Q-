@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model
+class Group extends Model
 {
-            /**
+        /**
      * The table associated with the model.
      * 
      * @var string
      */
-    protected $table = 'games';
-
+    protected $table = 'group_names';
+    
     protected $fillable = [
-        'name', 'category', 'description', 'image'
+        'group_name', 'description', 'image'
     ];
     // public function getImageAttribute()
     // {

@@ -114,8 +114,9 @@
                         <p><span class="leaderboard-legend">Player Name:   </span>{{$datadisplayed->name}}</p>
                         <p><span class="leaderboard-legend">Highscore:     </span>{{$datadisplayed->highscore}}</p>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
+                
 
 
 
