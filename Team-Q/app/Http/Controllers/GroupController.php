@@ -23,11 +23,9 @@ class GroupController extends Controller
      */
     public function index()
     {
-
         $groups = Group::latest()->paginate(5);
 
         return view('groups.index', compact('groups'))
-
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -73,7 +71,6 @@ class GroupController extends Controller
             // Set group image path in database to filePath
             $group->image = $filePath;
         }
-
         return redirect()->route('groups.index')
             ->with('success', 'Group created successfully.');
     }

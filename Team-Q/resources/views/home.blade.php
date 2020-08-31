@@ -12,7 +12,7 @@
             <div class='gametile'>
                 <h4 class ='gametitle'>{{ $game->name }}</h4>
                 <img src="{{ URL::to('/') }}{{ $game->image }}" class='gameimg'>
-                <a href=''><div class='button'>View Game</div></a>
+                <a href="{{ route('games.show', $game->id) }}"><div class='button'>View Game</div></a>
                 <a href=''><div class='button'>Scores</div></a>
             </div>
             @endforeach
