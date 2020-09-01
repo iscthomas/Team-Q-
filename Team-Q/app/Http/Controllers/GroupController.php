@@ -28,8 +28,11 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::latest()->paginate(5);
+        
+        $user_id = request()->user()->id;
+        $groups_list = Groups::get()->first();
 
-        return view('groups.index', compact('groups'))
+        return view('groups.index', compact('groups', 'groups_list', 'user_id'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -163,10 +166,39 @@ class GroupController extends Controller
             'user_highscore' => $data[2],
         ]);
 
-        dd("Group-id = " . $group_id . ". User-id = " . $user_id);
+        // dd("Group-id = " . $group_id . ". User-id = " . $user_id);
 
         return redirect()->route('groups.index')
         ->with('success', 'You have been added to the group successfully');
+    }
+
+    public function leave(Group $group) {
+
+        $user_id = request()->user()->id;
+        #$user_id = auth()->user()->id();
+        $group_id = $group->id;
+        
+        $created_at = Carbon::now()->toDateTimeString();
+        $updated_at = Carbon::now()->toDateTimeString();
+
+        $data = [ $group_id, $user_id, null, $created_at, $updated_at];
+
+        Validator::make($data, [
+            'group_id' => ['required', 'int', 'max:6'],
+            'user_id' => ['required', 'int', 'max:6'],
+            'user_highscore' => ['required', 'int', 'max:20'],
+        ]);
+
+        Groups::create([
+            'group_id' => $data[0],
+            'user_id' => $data[1],
+            'user_highscore' => $data[2],
+        ]);
+
+        // dd("Group-id = " . $group_id . ". User-id = " . $user_id);
+
+        return redirect()->route('groups.index')
+        ->with('success', 'You have been removed to the group successfully');
     }
 
     /**

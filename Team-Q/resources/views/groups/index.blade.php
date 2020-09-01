@@ -38,9 +38,14 @@
                     <a class="btn btn-info" href="{{ route('groups.show',$group->id) }}">Show</a>
     
                     <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a>
-
-                    <a class="btn btn-warning" href="{{ url('/join', $group->id) }}">Join</a>
-   
+            
+                    @foreach ($groups_list as $each_group)
+                        @if ($group->id == $each_group->id and $user_id == $each_group->user_id)
+                            <a class="btn btn-warning" href="{{ url('/leave', $group->id) }}">Leave</a>
+                        @else
+                            <a class="btn btn-warning" href="{{ url('/join', $group->id) }}">Join</a>
+                        @endif
+                    @endforeach
                     @csrf
                     @method('DELETE')
       

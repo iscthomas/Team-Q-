@@ -34,3 +34,5 @@ Route::resource('groups','GroupController');
 Route::post('/groups/create', 'GroupController@store')->name('groups.create');
 
 Route::get('/join/{group}', 'GroupController@join');
+
+Route::get('/leave/{group}', 'GroupController@leave');
