@@ -1,12 +1,12 @@
-@extends('games.layout')
+@extends('groups.layout')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2> Show Game</h2>
+            <h2> Show Group</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('games.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('groups.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -15,25 +15,19 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Name:</strong>
-            {{ $game->name }}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Category/Genre:</strong>
-            {{ $game->category }}
+            {{ $group->group_name }}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Description:</strong>
-            {{ $game->description }}
+            {{ $group->description }}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Image:</strong>
-            <img src="{{ URL::to('/') }}{{ $game->image }}" style="max-height:400px"/>
+            <img src="{{ URL::to('/') }}{{ $group->image }}" style="max-height:400px"/>
         </div>
     </div>
 </div>

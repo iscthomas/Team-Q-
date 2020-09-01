@@ -15,12 +15,11 @@
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
                 margin: 0;
             }
 
             .full-height {
-                height: 100vh;
+                /* height: 100vh; */
             }
 
             .flex-center {
@@ -103,19 +102,62 @@
                     @endauth
                 </div>
             @endif
+
+            <?php
+            if(isset($_POST['search']))
+                {
+                    $valueToSearch = $_POST['valueToSearch'];
+                    // search in all table columns
+                    // using concat mysql function
+                    $query = "SELECT * FROM `highscores` WHERE CONCAT(`id`, `name`, `highscore`) LIKE '%".$valueToSearch."%'";
+                    $search_result = filterTable($query);
+                    
+                }
+                else {
+                    $query = "SELECT * FROM `highscores`";
+                    $search_result = filterTable($query);
+                }
+
+                // function to connect and execute the query
+                function filterTable($query)
+                {
+                    $conn = mysqli_connect("202.49.5.169", "in710shared", "P@ssw0rd", "in710shared_swe_q#");
+                    
+                    $filter_Result = mysqli_query($conn, $query);
+                    return $filter_Result;
+                }
+
+                ?>  
+
             <div class="content">
 
                 <?php $dbdata = DB::table('highscores')->get();?>
                 
                 <div class="leaderboard-container">
                     <h2 class="leaderboard-title">Highscores Leaderboard</h2>
+                    <form class="leaderboard-search" action="leaderboard"  method="POST">
+                        @csrf
+                            <label>Search Player</label>
+                            <input type="text" name="valueToSearch" ></input>
+                            <input type="submit" name="search" value="Filter"></input>
+                    </form>
                     @foreach($dbdata as $datadisplayed)
                     <div class="leaderboard-inner">
                         <p><span class="leaderboard-legend">Player Name:   </span>{{$datadisplayed->name}}</p>
                         <p><span class="leaderboard-legend">Highscore:     </span>{{$datadisplayed->highscore}}</p>
                     </div>
+                    @endforeach
+                    
+                    <?php while($row = mysqli_fetch_array($search_result)):?>
+                        <div class="leaderboard-inner"> 
+                            <p><span class="leaderboard-legend">Rank:   </span><?php echo $row['id'];?></p>
+                            <p><span class="leaderboard-legend">Player Name Search:   </span><?php echo $row['name'];?></p>
+                            <p><span class="leaderboard-legend">Highscore Search:   </span><?php echo $row['highscore'];?></p>
+                        </div>
+                    <?php endwhile;?>
                 </div>
-                @endforeach
+
+
 
 
 

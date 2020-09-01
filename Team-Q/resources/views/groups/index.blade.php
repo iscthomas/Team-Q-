@@ -1,13 +1,13 @@
-@extends('games.layout')
+@extends('groups.layout')
  
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>View All Games</h2>
+                <h2>View All Groups</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('games.create') }}"> Create New Game</a>
+                <a class="btn btn-success" href="{{ route('groups.create') }}"> Create New Group</a>
             </div>
         </div>
     </div>
@@ -21,25 +21,23 @@
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
-            <th>Game Title</th>
-            <th>Category/Genre</th>
+            <th>Group Name</th>
             <th>Description</th>
             <th>Image</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($games as $game)
+        @foreach ($groups as $group)
         <tr>
-            <td>{{ $game->id }}</td>
-            <td>{{ $game->name }}</td>
-            <td>{{ $game->category }}</td>
-            <td>{{ $game->description }}</td>
-            <td><img src="{{ URL::to('/') }}{{ $game->image }}" style="max-height:200px"/></td>
+            <td>{{ $group->id }}</td>
+            <td>{{ $group->group_name }}</td>
+            <td>{{ $group->description }}</td>
+            <td><img src="{{ URL::to('/') }}{{ $group->image }}" style="max-height:200px"/></td>
             <td>
-                <form action="{{ route('games.destroy',$game->id) }}" method="POST">
+                <form action="{{ route('groups.destroy',$group->id) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('games.show',$game->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('groups.show',$group->id) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ route('games.edit',$game->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')
@@ -51,6 +49,6 @@
         @endforeach
     </table>
   
-    {!! $games->links() !!}
+    {!! $groups->links() !!}
       
 @endsection

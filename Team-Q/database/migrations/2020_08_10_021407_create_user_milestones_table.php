@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -33,3 +34,4 @@ class CreateUserMilestonesTable extends Migration
         Schema::dropIfExists('user_milestones');
     }
 }
+
