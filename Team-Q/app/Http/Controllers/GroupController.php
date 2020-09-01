@@ -71,6 +71,8 @@ class GroupController extends Controller
             // Set group image path in database to filePath
             $group->image = $filePath;
         }
+        $group->save();
+        
         return redirect()->route('groups.index')
             ->with('success', 'Group created successfully.');
     }

@@ -72,6 +72,8 @@ class GameController extends Controller
             // Set game image path in database to filePath
             $game->image = $filePath;
         }
+        $game->save();
+
         return redirect()->route('games.index')
             ->with('success', 'Game created successfully.');
     }
