@@ -40,3 +40,6 @@ Route::post('/games/create', 'GameController@store')->name('games.create')->midd
 Route::resource('groups','GroupController');
 Route::post('/groups/create', 'GroupController@store')->name('groups.create')->middleware('verified');
 
+//routes required for user crud features
+Route::resource('users','ProfileController');
+Route::post('/users/create', 'ProfileController@store')->name('user.create')->middleware('verified');

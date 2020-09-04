@@ -37,13 +37,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Category/Genre:</strong>
-                <input type="text" class="form-control" name="category" value="{{ $game->category }}" required></input>
+                <input type="text" class="form-control" name="category" value="{{ $game->category }}" required>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <input type="text" class="form-control" style="height:150px" name="description" value="{{ $game->description }}" required></input>
+                <input type="text" class="form-control" style="height:150px" name="description" value="{{ $game->description }}" required>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
