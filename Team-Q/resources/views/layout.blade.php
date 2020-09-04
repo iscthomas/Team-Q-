@@ -16,11 +16,11 @@
             html, body {
                 background-image: url(images/12491.jpg);
                 background-size: 100vw;
-                background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 margin: 0;
+                overflow-x: hidden;
             }
 
             .flex-center {
@@ -232,6 +232,45 @@
             .disp-button {
                 background-color: rgba(0, 172, 238, 0.3);
 
+            }
+
+            /* GAMES PAGES */
+            .btn {
+                width: 10vw;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                float: left;
+                margin-left: 1vw;
+                margin-top: 3vh;
+                color: whitesmoke;
+                font-size: 2.8rem;
+            }
+
+            .games-btn, .groups-btn {
+                padding: 10px 20px;
+                margin-top: 3vh;
+                margin-right: 1vw;
+                float: right;
+                border-radius: 12px;
+                background-color: var(--cblue);
+                color: whitesmoke;
+            }
+
+            .games-btn:hover {
+                text-decoration: none;
+            }
+
+            table {
+                margin-top: 5vh;
+                margin-right: 1vw;
+            }
+
+            th, td {
+                font-size: 1rem;
+                background-color: rgba(20,20,20, 0.7);
+                color: whitesmoke;
             }
         </style>
 

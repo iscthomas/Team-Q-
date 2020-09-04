@@ -1,4 +1,5 @@
-@extends('games.layout')
+@extends('layout')
+@section('title','Show Game')
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
