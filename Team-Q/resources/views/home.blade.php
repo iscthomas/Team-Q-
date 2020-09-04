@@ -20,6 +20,7 @@
 
     </div>
 </div>
+
 <div class='flex-center'>
     <div class='para'>
         <h2>Top Players</h2>
