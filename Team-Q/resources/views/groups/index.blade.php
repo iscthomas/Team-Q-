@@ -18,6 +18,12 @@
         </div>
     @endif
    
+   @php
+        $min = 0;
+        $max = count($groups_list);
+        $index = ($max - 1);
+   @endphp
+
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
@@ -39,13 +45,34 @@
     
                     <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a>
             
-                    @foreach ($groups_list as $each_group)
-                        @if ($group->id == $each_group->id and $user_id == $each_group->user_id)
+                <?php
+                    $joined = array_fill($min, $max, "false");
+                    
+                    if ($max > 0) {
+                        for ($i = 0; $i < $max; $i++) { 
+                            if (($group->id == $groups_list[$i]->group_id) && ($user_id == $groups_list[$i]->user_id)) {
+                                $joined[$i] = "true";
+                            }
+                            echo($joined[$i]);
+                        }
+                    }
+                ?>
+                    {{ $group->id }}
+
+                    @if ($index > $min)
+                        @if ($joined[$index-1] == "true")
                             <a class="btn btn-warning" href="{{ url('/leave', $group->id) }}">Leave</a>
                         @else
-                            <a class="btn btn-warning" href="{{ url('/join', $group->id) }}">Join</a>
+                            <a class="btn btn-success" href="{{ url('/join', $group->id) }}">Join</a>
                         @endif
-                    @endforeach
+
+                        @php
+                            $index++
+                        @endphp
+                    @else
+                        <a class="btn btn-danger" href="{{ url('/join', $group->id) }}">Join</a>
+                    @endif
+
                     @csrf
                     @method('DELETE')
       

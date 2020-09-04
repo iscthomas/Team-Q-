@@ -30,7 +30,9 @@ class GroupController extends Controller
         $groups = Group::latest()->paginate(5);
         
         $user_id = request()->user()->id;
-        $groups_list = Groups::get()->first();
+        $groups_list = Groups::get()->all();
+
+        // dd($groups_list);
 
         return view('groups.index', compact('groups', 'groups_list', 'user_id'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -146,13 +148,12 @@ class GroupController extends Controller
     public function join(Group $group) {
 
         $user_id = request()->user()->id;
-        #$user_id = auth()->user()->id();
         $group_id = $group->id;
         
         $created_at = Carbon::now()->toDateTimeString();
         $updated_at = Carbon::now()->toDateTimeString();
 
-        $data = [ $group_id, $user_id, null, $created_at, $updated_at];
+        $data = [ $group_id, $user_id, 0, $created_at, $updated_at];
 
         Validator::make($data, [
             'group_id' => ['required', 'int', 'max:6'],
@@ -163,7 +164,7 @@ class GroupController extends Controller
         Groups::create([
             'group_id' => $data[0],
             'user_id' => $data[1],
-            'user_highscore' => $data[2],
+            'user_highscore' => $data[2]
         ]);
 
         // dd("Group-id = " . $group_id . ". User-id = " . $user_id);
@@ -175,7 +176,6 @@ class GroupController extends Controller
     public function leave(Group $group) {
 
         $user_id = request()->user()->id;
-        #$user_id = auth()->user()->id();
         $group_id = $group->id;
         
         $created_at = Carbon::now()->toDateTimeString();
@@ -194,8 +194,6 @@ class GroupController extends Controller
             'user_id' => $data[1],
             'user_highscore' => $data[2],
         ]);
-
-        // dd("Group-id = " . $group_id . ". User-id = " . $user_id);
 
         return redirect()->route('groups.index')
         ->with('success', 'You have been removed to the group successfully');
