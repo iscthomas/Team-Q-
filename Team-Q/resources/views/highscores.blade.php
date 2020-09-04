@@ -141,12 +141,7 @@
                             <input type="text" name="valueToSearch" ></input>
                             <input type="submit" name="search" value="Filter"></input>
                     </form>
-                    @foreach($dbdata as $datadisplayed)
-                    <div class="leaderboard-inner">
-                        <p><span class="leaderboard-legend">Player Name:   </span>{{$datadisplayed->name}}</p>
-                        <p><span class="leaderboard-legend">Highscore:     </span>{{$datadisplayed->highscore}}</p>
-                    </div>
-                    @endforeach
+                    
                     
                     <?php while($row = mysqli_fetch_array($search_result)):?>
                         <div class="leaderboard-inner"> 
