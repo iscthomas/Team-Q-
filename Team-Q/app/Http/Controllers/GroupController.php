@@ -32,10 +32,31 @@ class GroupController extends Controller
         $user_id = request()->user()->id;
         $groups_list = Groups::get()->all();
 
-        // dd($groups_list);
+        $joined = $this->filter_joined_groups($groups, $groups_list, $user_id);
 
-        return view('groups.index', compact('groups', 'groups_list', 'user_id'))
+        return view('groups.index', compact('groups', 'groups_list', 'user_id', 'joined'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function filter_joined_groups($groups, $groups_list, $user_id) {
+
+        $min = 0;
+        $array_length = count($groups);
+        $j = array_fill($min, ($array_length + 1), "false");
+        $max = count($groups_list);
+
+        foreach ($groups as $group) {
+            
+            if ($max > 0) {
+                for ($i = 0; $i < $max; $i++) { 
+                    if (($group->id == $groups_list[$i]->group_id) && ($user_id == $groups_list[$i]->user_id)) {
+                        $j[(($group->id) - 1)] = "true";
+                    }
+                }
+            }
+        }
+
+        return $j;
     }
 
     /**

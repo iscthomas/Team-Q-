@@ -18,24 +18,6 @@
         </div>
     @endif
    
-   <?php   
-        $min = 0;
-        $array_length = count($groups);
-        $joined = array_fill($min, ($array_length + 1), "false");
-        $max = count($groups_list);
-
-        foreach ($groups as $group) {
-            
-            if ($max > 0) {
-                for ($i = 0; $i < $max; $i++) { 
-                    if (($group->id == $groups_list[$i]->group_id) && ($user_id == $groups_list[$i]->user_id)) {
-                        $joined[(($group->id) - 1)] = "true";
-                    }
-                }
-            }
-        }
-    ?>
-
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
