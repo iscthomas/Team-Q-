@@ -38,6 +38,11 @@ class GroupController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    /**
+     * Returns an array of strings used to check which groups a user has joined.
+     *
+     * @return $joined
+     */
     public function filter_joined_groups($groups, $groups_list, $user_id) {
 
         $min = 0;
@@ -166,12 +171,16 @@ class GroupController extends Controller
             ->with('success', 'Group updated successfully');
     }
 
+    /**
+     * Adds a user to the respective group and returns the main groups view to be displayed.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function join(Group $group) {
 
         $user_id = request()->user()->id;
         $group_id = $group->id;
         
-        // dd($group_id);
         $created_at = Carbon::now()->toDateTimeString();
         $updated_at = Carbon::now()->toDateTimeString();
 
@@ -189,12 +198,15 @@ class GroupController extends Controller
             'user_highscore' => $data[2]
         ]);
 
-        // dd("Group-id = " . $group_id . ". User-id = " . $user_id);
-
         return redirect()->route('groups.index')
         ->with('success', 'You have been added to the group successfully');
     }
 
+    /**
+     * Removes a user from a respective group and returns the main groups view to be displayed.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function leave(Group $group) {
 
         Groups::where('group_id', '=', $group->id)->delete();
