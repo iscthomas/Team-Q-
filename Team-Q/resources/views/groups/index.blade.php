@@ -18,11 +18,23 @@
         </div>
     @endif
    
-   @php
+   <?php   
         $min = 0;
+        $array_length = count($groups);
+        $joined = array_fill($min, ($array_length + 1), "false");
         $max = count($groups_list);
-        $index = ($max - 1);
-   @endphp
+
+        foreach ($groups as $group) {
+            
+            if ($max > 0) {
+                for ($i = 0; $i < $max; $i++) { 
+                    if (($group->id == $groups_list[$i]->group_id) && ($user_id == $groups_list[$i]->user_id)) {
+                        $joined[(($group->id) - 1)] = "true";
+                    }
+                }
+            }
+        }
+    ?>
 
     <table class="table table-bordered">
         <tr>
@@ -45,32 +57,10 @@
     
                     <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a>
             
-                <?php
-                    $joined = array_fill($min, $max, "false");
-                    
-                    if ($max > 0) {
-                        for ($i = 0; $i < $max; $i++) { 
-                            if (($group->id == $groups_list[$i]->group_id) && ($user_id == $groups_list[$i]->user_id)) {
-                                $joined[$i] = "true";
-                            }
-                            echo($joined[$i]);
-                        }
-                    }
-                ?>
-                    {{ $group->id }}
-
-                    @if ($index > $min)
-                        @if ($joined[$index-1] == "true")
-                            <a class="btn btn-warning" href="{{ url('/leave', $group->id) }}">Leave</a>
-                        @else
-                            <a class="btn btn-success" href="{{ url('/join', $group->id) }}">Join</a>
-                        @endif
-
-                        @php
-                            $index++
-                        @endphp
+                    @if ($joined[(($group->id) - 1)] == "true")
+                        <a class="btn btn-warning" href="{{ url('/leave', $group->id) }}">Leave</a>
                     @else
-                        <a class="btn btn-danger" href="{{ url('/join', $group->id) }}">Join</a>
+                        <a class="btn btn-success" href="{{ url('/join', $group->id) }}">Join</a>
                     @endif
 
                     @csrf

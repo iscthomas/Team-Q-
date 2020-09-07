@@ -150,6 +150,7 @@ class GroupController extends Controller
         $user_id = request()->user()->id;
         $group_id = $group->id;
         
+        // dd($group_id);
         $created_at = Carbon::now()->toDateTimeString();
         $updated_at = Carbon::now()->toDateTimeString();
 
@@ -182,18 +183,6 @@ class GroupController extends Controller
         $updated_at = Carbon::now()->toDateTimeString();
 
         $data = [ $group_id, $user_id, null, $created_at, $updated_at];
-
-        Validator::make($data, [
-            'group_id' => ['required', 'int', 'max:6'],
-            'user_id' => ['required', 'int', 'max:6'],
-            'user_highscore' => ['required', 'int', 'max:20'],
-        ]);
-
-        Groups::create([
-            'group_id' => $data[0],
-            'user_id' => $data[1],
-            'user_highscore' => $data[2],
-        ]);
 
         return redirect()->route('groups.index')
         ->with('success', 'You have been removed to the group successfully');
