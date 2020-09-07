@@ -197,13 +197,7 @@ class GroupController extends Controller
 
     public function leave(Group $group) {
 
-        $user_id = request()->user()->id;
-        $group_id = $group->id;
-        
-        $created_at = Carbon::now()->toDateTimeString();
-        $updated_at = Carbon::now()->toDateTimeString();
-
-        $data = [ $group_id, $user_id, null, $created_at, $updated_at];
+        Groups::where('group_id', '=', $group->id)->delete();
 
         return redirect()->route('groups.index')
         ->with('success', 'You have been removed to the group successfully');
