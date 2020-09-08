@@ -22,6 +22,7 @@ class CreateUserProfiles extends Migration
             $table->string('location')->nullable();
             $table->string('about_me')->nullable();
             $table->string('avatar')->nullable();
+            $table->integer('user_id')->foreign('user_id')->references('users')->on('id')->onDelete('cascade');
         });
     }
 

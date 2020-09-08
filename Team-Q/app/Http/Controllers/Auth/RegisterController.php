@@ -70,18 +70,53 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    {        
         Email::create([
             'email' => $data['email'],
             'username' => $data['username'],
         ]);
-
-        return User::create([
+            
+        User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+                
+        return $this->store();
+    }
+
+    public function store() {
+
+        $request->validate([
+            'real_name' => 'required',
+            'favourite_games' => 'required',
+            'location' => 'required',
+            'about_me' => 'required',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_id' => 'required'
+        ]);
+
+        $profile = Profile::create($request->all());
+
+        // Check if an image has been uploaded
+        if ($request->has('avatar')) {
+            // Get image file
+            $avatar = $request->file('avatar');
+            // Make a image name based on profile name and current timestamp
+            $name = Str::slug($request->input('name')) . '_' . time();
+            // Define folder path
+            $folder = '/images/profiles/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $name . '.' . $avatar->getClientOriginalExtension();
+            // Upload image
+            $this->uploadOne($avatar, $folder, 'public', $name);
+            // Set profile image path in database to filePath
+        }
+
+        $user_id = auth()->user->id;
+        
+        $profile->save();
     }
 }

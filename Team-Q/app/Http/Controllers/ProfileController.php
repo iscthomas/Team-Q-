@@ -53,7 +53,8 @@ class ProfileController extends Controller
             'favourite_games' => 'required',
             'location' => 'required',
             'about_me' => 'required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_id' => 'required'
         ]);
 
         $profile = Profile::create($request->all());
@@ -71,8 +72,10 @@ class ProfileController extends Controller
             // Upload image
             $this->uploadOne($avatar, $folder, 'public', $name);
             // Set profile image path in database to filePath
-            $profile->image = $filePath;
         }
+
+        $user_id = auth()->user->id;
+        
         $profile->save();
 
         return redirect()->route('profiles.index')
