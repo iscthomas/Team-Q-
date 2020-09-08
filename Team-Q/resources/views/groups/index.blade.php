@@ -41,6 +41,7 @@
             
                     @if ($joined[(($group->id) - 1)] == "true")
                         <a class="btn btn-warning" href="{{ url('/leave', $group->id) }}">Leave</a>
+                        <a class="btn btn-success" href="{{ route('highscores.create') }}">New highscore  <i class="fas fa-plus" aria-hidden="true"></i></a>
                     @else
                         <a class="btn btn-success" href="{{ url('/join', $group->id) }}">Join</a>
                     @endif

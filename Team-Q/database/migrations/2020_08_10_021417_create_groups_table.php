@@ -14,6 +14,7 @@ class CreateGroupsTable extends Migration
     public function up()
     {
         Schema::create('groups', function (Blueprint $table) {
+            $table->id();
             $table->string('group_id')->foreign('group_names_id')->references('id')->on('group_names')->onDelete('cascade');
             $table->string('user_id')->foreign('user_id')->references('id')->on('users');
             $table->string('user_highscore')->nullable();
