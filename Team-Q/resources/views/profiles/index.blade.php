@@ -38,10 +38,6 @@
     
                     <a class="btn btn-primary" href="{{ route('profiles.edit',$profile->id) }}">Edit</a><br>
    
-                    @csrf
-                    @method('DELETE')
-      
-                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>

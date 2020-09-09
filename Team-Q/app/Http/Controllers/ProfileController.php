@@ -113,6 +113,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
+        unlink("../public$profile->image");
         $request->validate([
             'real_name' => 'required',
             'favourite_games' => 'required',
@@ -152,6 +153,7 @@ class ProfileController extends Controller
      */
     public function destroy(Profile $profile)
     {
+        unlink("../public$profile->image");
         $profile->delete();
 
         return redirect()->route('profiles.index')
