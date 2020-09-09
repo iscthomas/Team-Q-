@@ -145,6 +145,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
+        unlink("../public$group->image");
         $group->delete();
 
         return redirect()->route('groups.index')
