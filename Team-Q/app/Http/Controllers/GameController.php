@@ -109,6 +109,7 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
+        unlink("../public$game->image");
         $request->validate([
             'name' => 'required',
             'category' => 'required',
@@ -117,9 +118,10 @@ class GameController extends Controller
         ]);
 
         $game->update($request->all());
-
+        
         // Check if an image has been uploaded
         if ($request->has('image')) {
+
             // Get image file
             $image = $request->file('image');
             // Make a image name based on game name and current timestamp
