@@ -302,6 +302,7 @@
                     <a href="{{url('/games')}}">Players</a>
                     <a href="{{url('/groups')}}">Groups</a>
                     <a href="{{url('/scores')}}">Scores</a>
+                    <a href="{{url('/highscores/leaderboard')}}">HighScores</a>
                     <a id="navbarDropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
