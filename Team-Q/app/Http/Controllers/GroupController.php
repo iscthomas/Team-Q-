@@ -108,12 +108,12 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
+        unlink("../public$group->image");
         $request->validate([
             'group_name' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-
         $group->update($request->all());
 
         // Check if an image has been uploaded
