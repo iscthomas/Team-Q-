@@ -23,7 +23,7 @@
 </div>
 @endif
 
-<form action="{{ route('groups.update',$group->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ url('/group-highscores/update',$group->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
