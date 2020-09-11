@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
+// Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores');
 
 Route::get('/games', 'PageController@games');
 
@@ -37,6 +37,6 @@ Route::get('/join/{group}', 'GroupController@join');
 
 Route::get('/leave/{group}', 'GroupController@leave');
 
-Route::resource('highscores', 'HighscoreController');
 
-Route::post('/add');
+Route::get('/highscores/create/{group}', 'HighscoreController@create');
+Route::post('/highscores/store/{group}', 'HighscoreController@store');

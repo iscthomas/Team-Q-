@@ -23,7 +23,7 @@
 </div>
 @endif
 
-<form action="{{ route('highscores.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ url('/highscores/store', $group->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <div class="row">

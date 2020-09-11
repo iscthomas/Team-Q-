@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Highscore;
 use App\Group;
 use App\Groups;
 use App\User;
@@ -19,52 +20,24 @@ class HighscoreController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $groups = Group::latest()->paginate(5);
-        
-        $user_id = request()->user()->id;
-        $groups_list = Groups::get()->all();
-
-        $joined = $this->filter_joined_groups($groups, $groups_list, $user_id);
-
-        return view('groups.index', compact('groups', 'groups_list', 'user_id', 'joined'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-    }
-
-    public function filter_joined_groups($groups, $groups_list, $user_id) {
-
-        $min = 0;
-        $array_length = count($groups);
-        $j = array_fill($min, ($array_length + 1), "false");
-        $max = count($groups_list);
-
-        foreach ($groups as $group) {
-            
-            if ($max > 0) {
-                for ($i = 0; $i < $max; $i++) { 
-                    if (($group->id == $groups_list[$i]->group_id) && ($user_id == $groups_list[$i]->user_id)) {
-                        $j[(($group->id) - 1)] = "true";
-                    }
-                }
-            }
-        }
-
-        return $j;
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Group $group)
     {
-        return view('highscores.create');
+        return view('highscores.create', compact('group'));
+    }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Highscore  $group
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Highscore $highscore)
+    {
+        return view('highscores.show', compact('group'));
     }
 
     /**
@@ -73,15 +46,37 @@ class HighscoreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function store(Request $request)
+    public function store(Request $request, Group $group)
     {
         $request->validate([
-            'group_name' => 'required',
-            'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'highscore' => 'required'
         ]);
 
+        $user_id = request()->user()->id;
+
+        $group = Groups::where('group_id', '=', $group->id)->get();
+
+        $joined_group_id = $group[0]->id;
+
+        $highscore = request('highscore');
+        
+        $created_at = Carbon::now()->toDateTimeString();
+        $updated_at = Carbon::now()->toDateTimeString();
+        
+        $data = [$joined_group_id, $user_id, $highscore, $created_at, $updated_at];
+
+        Validator::make($data, [
+            'joined_group_id' => ['required', 'int', 'max:6'],
+            'user_id' => ['required', 'int', 'max:6'],
+            'highscore' => ['required', 'int', 'max:20'],
+        ]);
+
+        Highscore::create([
+            'joined_group_id' => $data[0],
+            'user_id' => $data[1],
+            'highscore' => $data[2]
+        ]);
+        
         return redirect()->route('groups.index')
             ->with('success', 'Created highscore successfully.');
     }
@@ -89,10 +84,10 @@ class HighscoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Highscore  $group
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit(Highscore $group)
     {
         return view('highscores.edit', compact('group'));
     }
@@ -101,10 +96,10 @@ class HighscoreController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Group  $group
+     * @param  \App\Highscore  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(Request $request, Highscore $group)
     {
         $request->validate([
             'group_name' => 'required',
@@ -117,20 +112,20 @@ class HighscoreController extends Controller
         $group->save();
 
         return redirect()->route('groups.index')
-            ->with('success', 'Group updated successfully');
+            ->with('success', 'Highscore updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Highscore  $group
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy(Highscore $group)
     {
         $group->delete();
 
         return redirect()->route('groups.index')
-            ->with('success', 'Group deleted successfully');
+            ->with('success', 'Highscore deleted successfully');
     }
 }
