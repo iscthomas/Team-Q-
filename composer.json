@@ -1,0 +1,5 @@
+{
+    "require": {
+        "beyondcode/laravel-confirm-email": "^2.0"
+    }
+}

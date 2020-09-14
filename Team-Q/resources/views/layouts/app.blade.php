@@ -18,13 +18,48 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        html, body {
+            background-image: url(images/12491.jpg);
+            background-size: 150vw;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            margin: 0;
+            overflow-x: hidden;   
+        }
+
+        .card-header {
+            background-color: rgba(0, 172, 238, 0.3);
+        }
+
+        .card, .navbar {
+            background-color: rgba(20,20,20, 0.7);
+            color: whitesmoke;
+        }
+
+        .navbar {
+            padding: 20px 0;
+            font-size: 1.2rem;
+        }
+
+        .nav-actions {
+            color: whitesmoke;
+            padding-left: 2vw;
+        }
+
+        .nav-actions:hover {
+            text-decoration: none;
+            color: #e61b22;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="nav-actions" href="{{ url('/') }}">
+                    Name Pending
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -41,11 +76,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-actions" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-actions" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else

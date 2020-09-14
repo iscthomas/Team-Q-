@@ -72,6 +72,7 @@ class GameController extends Controller
             // Set game image path in database to filePath
             $game->image = $filePath;
         }
+        $game->save();
 
         return redirect()->route('games.index')
             ->with('success', 'Game created successfully.');
@@ -108,6 +109,7 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
+        unlink("../public$game->image");
         $request->validate([
             'name' => 'required',
             'category' => 'required',
@@ -116,9 +118,10 @@ class GameController extends Controller
         ]);
 
         $game->update($request->all());
-
+        
         // Check if an image has been uploaded
         if ($request->has('image')) {
+
             // Get image file
             $image = $request->file('image');
             // Make a image name based on game name and current timestamp
@@ -132,6 +135,7 @@ class GameController extends Controller
             // Set game image path in database to filePath
             $game->image = $filePath;
         }
+
         $game->save();
 
         return redirect()->route('games.index')
@@ -146,6 +150,7 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
+        unlink("../public$game->image");
         $game->delete();
 
         return redirect()->route('games.index')

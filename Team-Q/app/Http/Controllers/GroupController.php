@@ -101,7 +101,8 @@ class GroupController extends Controller
             // Set group image path in database to filePath
             $group->image = $filePath;
         }
-
+        $group->save();
+        
         return redirect()->route('groups.index')
             ->with('success', 'Group created successfully.');
     }
@@ -137,12 +138,12 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
+        unlink("../public$group->image");
         $request->validate([
             'group_name' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-
         $group->update($request->all());
 
         // Check if an image has been uploaded
@@ -205,6 +206,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
+        unlink("../public$group->image");
         $group->delete();
 
         return redirect()->route('groups.index')
