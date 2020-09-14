@@ -17,8 +17,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('index')->middleware('verified');
 
-
 Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores')->middleware('verified');
+
+Route::post('/highscores/{highscore}','DatabaseController@showHighscores')->middleware('verified');;
 
 Route::get('/games', 'PageController@games')->middleware('verified');
 
@@ -38,3 +39,10 @@ Route::post('/games/create', 'GameController@store')->name('games.create')->midd
 Route::resource('groups','GroupController');
 Route::post('/groups/create', 'GroupController@store')->name('groups.create')->middleware('verified');
 
+Route::get('/join/{group}', 'GroupController@join');
+
+Route::get('/leave/{group}', 'GroupController@leave');
+
+
+Route::get('/group-highscores/create/{group}', 'HighscoreController@create');
+Route::post('/group-highscores/store/{group}', 'HighscoreController@store');

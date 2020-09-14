@@ -33,12 +33,19 @@
    
                     <a class="btn btn-info" href="{{ route('groups.show',$group->id) }}">Show</a><br>
     
-                    <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a><br>
-   
+                    <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a>
+            
+                    @if ($joined[(($group->id) - 1)] == "true")
+                        <a class="btn btn-warning" href="{{ url('/leave', $group->id) }}">Leave</a>
+                        <a class="btn btn-success" href="{{ url('/group-highscores/create', $group->id) }}">New highscore  <i class="fas fa-plus" aria-hidden="true"></i></a>
+                    @else
+                        <a class="btn btn-success" href="{{ url('/join', $group->id) }}">Join</a>
+                    @endif
+
                     @csrf
                     @method('DELETE')
       
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Group?')">Delete</button>
                 </form>
             </td>
         </tr>
