@@ -34,7 +34,13 @@
                     <a class="btn btn-info" href="{{ route('groups.show',$group->id) }}">Show</a>
     
                     <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a>
-   
+            
+                    @if ($joined[(($group->id) - 1)] == "true")
+                        <a class="btn btn-warning" href="{{ url('/leave', $group->id) }}">Leave</a>
+                    @else
+                        <a class="btn btn-success" href="{{ url('/join', $group->id) }}">Join</a>
+                    @endif
+
                     @csrf
                     @method('DELETE')
       
