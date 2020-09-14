@@ -42,3 +42,7 @@ Route::post('/groups/create', 'GroupController@store')->name('groups.create')->m
 Route::get('/join/{group}', 'GroupController@join');
 
 Route::get('/leave/{group}', 'GroupController@leave');
+
+
+Route::get('/group-highscores/create/{group}', 'HighscoreController@create');
+Route::post('/group-highscores/store/{group}', 'HighscoreController@store');
