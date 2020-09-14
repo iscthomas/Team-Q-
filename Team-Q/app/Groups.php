@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Groups extends Model
 {
-        /**
+    /**
      * The table associated with the model.
      * 
      * @var string
@@ -14,6 +14,6 @@ class Groups extends Model
     protected $table = 'groups';
     
     protected $fillable = [
-        'user_highscore', 'user_id', 'group_id'
+        'group_id', 'user_id'
     ];
 }

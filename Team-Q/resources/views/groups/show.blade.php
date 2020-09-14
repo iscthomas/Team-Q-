@@ -27,7 +27,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Image:</strong>
-            {{ $group->image }}
+            <img src="{{ URL::to('/') }}{{ $group->image }}" style="max-height:400px"/>
         </div>
     </div>
 </div>

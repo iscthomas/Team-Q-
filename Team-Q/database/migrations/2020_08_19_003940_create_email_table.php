@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupsTable extends Migration
+class CreateEmailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('email', function (Blueprint $table) {
             $table->id();
-            $table->string('group_id')->foreign('group_names_id')->references('id')->on('group_names')->onDelete('cascade');
-            $table->string('user_id')->foreign('user_id')->references('id')->on('users');
-            $table->string('user_highscore')->nullable();
+            $table->string('email')->unique();
+            $table->string('username')->foreign('username')->references('username')->on('user')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('email');
     }
 }

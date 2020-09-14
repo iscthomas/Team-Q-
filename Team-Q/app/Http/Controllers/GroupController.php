@@ -101,7 +101,8 @@ class GroupController extends Controller
             // Set group image path in database to filePath
             $group->image = $filePath;
         }
-
+        $group->save();
+        
         return redirect()->route('groups.index')
             ->with('success', 'Group created successfully.');
     }
@@ -137,12 +138,12 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
+        unlink("../public$group->image");
         $request->validate([
             'group_name' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-
         $group->update($request->all());
 
         // Check if an image has been uploaded
@@ -169,27 +170,21 @@ class GroupController extends Controller
     public function join(Group $group) {
 
         $user_id = request()->user()->id;
-        $group_id = $group->id;
-        
-        // dd($group_id);
+        $group_id = $group->id;        
         $created_at = Carbon::now()->toDateTimeString();
         $updated_at = Carbon::now()->toDateTimeString();
 
-        $data = [ $group_id, $user_id, 0, $created_at, $updated_at];
+        $data = [ $group_id, $user_id, $created_at, $updated_at];
 
         Validator::make($data, [
             'group_id' => ['required', 'int', 'max:6'],
-            'user_id' => ['required', 'int', 'max:6'],
-            'user_highscore' => ['required', 'int', 'max:20'],
+            'user_id' => ['required', 'int', 'max:6']
         ]);
 
         Groups::create([
             'group_id' => $data[0],
-            'user_id' => $data[1],
-            'user_highscore' => $data[2]
+            'user_id' => $data[1]
         ]);
-
-        // dd("Group-id = " . $group_id . ". User-id = " . $user_id);
 
         return redirect()->route('groups.index')
         ->with('success', 'You have been added to the group successfully');
@@ -211,6 +206,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
+        unlink("../public$group->image");
         $group->delete();
 
         return redirect()->route('groups.index')
