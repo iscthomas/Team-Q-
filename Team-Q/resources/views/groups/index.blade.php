@@ -31,7 +31,7 @@
             <td>
                 <form action="{{ route('groups.destroy',$group->id) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('groups.show',$group->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('groups.show',$group->id) }}">Show</a><br>
     
                     <a class="btn btn-primary" href="{{ route('groups.edit',$group->id) }}">Edit</a>
             
