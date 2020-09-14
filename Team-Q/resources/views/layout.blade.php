@@ -4,8 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Home</title>
-
         <!-- Styles -->
         <style>
             :root {
@@ -14,7 +12,7 @@
             }
 
             html, body {
-                background-image: url(images/12491.jpg);
+                background-image: url('{{asset('images/12491.jpg')}}');
                 background-size: 100vw;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
@@ -72,6 +70,10 @@
                 margin-left: 90%;
             }
 
+            .subheading {
+                color: whitesmoke;
+            }
+
             .para > h3:hover {
                 color: var(--cblue);
             }
@@ -99,7 +101,7 @@
                 margin-bottom: 30px;
             }
 
-            .para {
+            .para, .panel {
                 width: 85vw;
                 height: 37vw;
                 padding-left: 25px;
@@ -112,6 +114,12 @@
                 color: whitesmoke;
                 position: relative;
                 z-index: 0;
+            }
+
+            .panel {
+                margin-top: 30px;
+                margin-left: 7vw;
+                height: 70vh;
             }
 
             .gametitle {

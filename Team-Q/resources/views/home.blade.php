@@ -16,10 +16,28 @@
                 <a href=''><div class='button'>Scores</div></a>
             </div>
             @endforeach
-            <!--<h3>view all</h3>-->
+            <h3>view all</h3>
 
     </div>
 </div>
+
+<!-- TRYING TO DISPLAY IN RECENTLY-FIRST ORDER, WORKING ON IT - IGNORE THIS :P
+    <div class='flex-center'>
+    <div class='para'>
+        <h2>Recently Added Games</h2>
+        <?php #$games = DB::table('games')->get();
+            #for ($i = 0; $i < count($games) && $i < 4; $i++):?>
+                <div class='gametile'>
+                    <h4 class ='gametitle'>{{ $game->name }}</h4>
+                    <img src="{{ URL::to('/') }}{{ $game->image }}" class='gameimg'>
+                    <a href="{{ route('games.show', $game->id) }}"><div class='button'>View Game</div></a>
+                    <a href=''><div class='button'>Scores</div></a>
+                </div>
+            <?php #endfor; ?>
+            <h3>view all</h3>
+
+    </div>
+</div> -->
 
 <div class='flex-center'>
     <div class='para'>
