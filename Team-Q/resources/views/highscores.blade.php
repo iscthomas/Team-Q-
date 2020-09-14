@@ -142,17 +142,15 @@
                 }
             ?>  
 
-                 <!-- Adding User Highscore Functionality-->
+        <!-- Adding User Highscore Functionality-->
                 
-                 <?php
-                    if(isset($_POST['add']))    {
+        <?php
+                if(isset($_POST['add'])){
 
-                    
                     // if values are in
                     if(isset($_POST['valueToAddName']) && ($_POST['valueToAddHighscore']))
                     {
-
-                        $conn = mysqli_connect("202.49.5.169", "in710shared", "P@ssw0rd", "in710shared_swe_q#");
+                        $conn= mysqli_connect("202.49.5.169", "in710shared", "P@ssw0rd", "in710shared_swe_q#");
                         // Check if connected
                         if($conn === false){
                             die("ERROR: Could not connect. " . mysqli_connect_error());
@@ -160,20 +158,15 @@
                         
                         $valueToAddName = $_POST['valueToAddName'];
                         $valueToAddHighscore = $_POST['valueToAddHighscore'];
-                        // $valueToAddRanking = $_POST['valueToAddRanking'];
+                        $valueToAddRanking = $_POST['valueToAddRanking'];
                         
                         // Insert values into database through connection 
-                        $insert = "INSERT INTO highscores (`name`, `highscore`) VALUES ('$valueToAddName', '$valueToAddHighscore')";
-                        
+                        $insert = "INSERT INTO highscores (`name`, `highscore`, `ranking`) VALUES ('$valueToAddName', '$valueToAddHighscore', '$valueToAddRanking')";
+                        $added_Result = mysqli_query($conn, $insert);
+                        return $added_Result;
                     }
                     else{
                         echo "<p>Please insert all values before continueing to add a player</p>";
-                    }
-
-                    function AddUserHighscores($conn, $insert){
-
-                        $added_Result = mysqli_query($conn, $insert);
-                                return $added_Result;
                     }
                 }
                 ?>
@@ -196,15 +189,13 @@
 
                     <?php while($row = mysqli_fetch_array($search_result)):?>
                         <div class="leaderboard-inner">
-                            <p><span class="leaderboard-legend">Rank:   </span><?php echo $row['id'];?></p>
+                            <p><span class="leaderboard-legend">ID:   </span><?php echo $row['id'];?></p>
                             <p><span class="leaderboard-legend">Player Name:   </span><?php echo $row['name'];?></p>
                             <p><span class="leaderboard-legend">Highscore:   </span><?php echo $row['highscore'];?></p>
                         </div>
                     <?php endwhile;?>
                     <br/>
 
-                
-                    
                     <h2>Add a Player to the highscores leaderboard</h2>
                     <form class="leaderboard-search" action="leaderboard"  method="POST">
                         @csrf
@@ -212,7 +203,9 @@
                             <input type="text" name="valueToAddName"></input>
                             <label>Highscore: </label>
                             <input type="text" name="valueToAddHighscore"></input>
-                            <input type="submit" name="add" value="Add Player"></input>
+                            <label>Ranking: </label>
+                            <input type="text" name="valueToAddRanking"></input>
+                            <input type="submit" name="add" value="Add"></input>
                             
                     </form>
                 

@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@index')->name('index')->middleware('verified');
 
 Route::get('/highscores/{highscore}', 'DatabaseController@showHighscores')->middleware('verified');
 
-Route::post('/highscores/{highscore}','DatabaseController@showHighscores')->middleware('verified');;
+Route::post('/highscores/{highscore}','DatabaseController@showHighscores')->middleware('verified');
 
 Route::get('/games', 'PageController@games')->middleware('verified');
 
