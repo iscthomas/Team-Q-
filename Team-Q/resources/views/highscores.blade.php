@@ -192,6 +192,7 @@
                             <p><span class="leaderboard-legend">ID:   </span><?php echo $row['id'];?></p>
                             <p><span class="leaderboard-legend">Player Name:   </span><?php echo $row['name'];?></p>
                             <p><span class="leaderboard-legend">Highscore:   </span><?php echo $row['highscore'];?></p>
+                            <p><span class="leaderboard-legend">Ranking:   </span><?php echo $row['ranking'];?></p>
                         </div>
                     <?php endwhile;?>
                     <br/>
