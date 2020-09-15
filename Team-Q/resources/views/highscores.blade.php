@@ -148,7 +148,7 @@
                 if(isset($_POST['add'])){
 
                     // if values are in
-                    if(isset($_POST['valueToAddName']) && ($_POST['valueToAddHighscore']))
+                    if(isset($_POST['valueToAddName']) && ($_POST['valueToAddHighscore']) && ($_POST['valueToAddRanking']))
                     {
                         $conn= mysqli_connect("202.49.5.169", "in710shared", "P@ssw0rd", "in710shared_swe_q#");
                         // Check if connected
