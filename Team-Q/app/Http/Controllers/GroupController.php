@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Groups;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class GroupController extends Controller
 {
@@ -24,9 +28,35 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::latest()->paginate(5);
+        
+        $user_id = request()->user()->id;
+        $groups_list = Groups::get()->all();
 
-        return view('groups.index', compact('groups'))
+        $joined = $this->filter_joined_groups($groups, $groups_list, $user_id);
+
+        return view('groups.index', compact('groups', 'groups_list', 'user_id', 'joined'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function filter_joined_groups($groups, $groups_list, $user_id) {
+
+        $min = 0;
+        $array_length = count($groups);
+        $j = array_fill($min, ($array_length + 1), "false");
+        $max = count($groups_list);
+
+        foreach ($groups as $group) {
+            
+            if ($max > 0) {
+                for ($i = 0; $i < $max; $i++) { 
+                    if (($group->id == $groups_list[$i]->group_id) && ($user_id == $groups_list[$i]->user_id)) {
+                        $j[(($group->id) - 1)] = "true";
+                    }
+                }
+            }
+        }
+
+        return $j;
     }
 
     /**
@@ -108,12 +138,12 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
+        unlink("../public$group->image");
         $request->validate([
             'group_name' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-
         $group->update($request->all());
 
         // Check if an image has been uploaded
@@ -137,6 +167,37 @@ class GroupController extends Controller
             ->with('success', 'Group updated successfully');
     }
 
+    public function join(Group $group) {
+
+        $user_id = request()->user()->id;
+        $group_id = $group->id;        
+        $created_at = Carbon::now()->toDateTimeString();
+        $updated_at = Carbon::now()->toDateTimeString();
+
+        $data = [ $group_id, $user_id, $created_at, $updated_at];
+
+        Validator::make($data, [
+            'group_id' => ['required', 'int', 'max:6'],
+            'user_id' => ['required', 'int', 'max:6']
+        ]);
+
+        Groups::create([
+            'group_id' => $data[0],
+            'user_id' => $data[1]
+        ]);
+
+        return redirect()->route('groups.index')
+        ->with('success', 'You have been added to the group successfully');
+    }
+
+    public function leave(Group $group) {
+
+        Groups::where('group_id', '=', $group->id)->delete();
+
+        return redirect()->route('groups.index')
+        ->with('success', 'You have been removed to the group successfully');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -145,6 +206,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
+        unlink("../public$group->image");
         $group->delete();
 
         return redirect()->route('groups.index')

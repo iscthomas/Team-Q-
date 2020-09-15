@@ -16,10 +16,11 @@
                 <a href=''><div class='button'>Scores</div></a>
             </div>
             @endforeach
-            <!--<h3>view all</h3>-->
+            <h3>view all</h3>
 
     </div>
 </div>
+
 <div class='flex-center'>
     <div class='para'>
         <h2>Top Players</h2>

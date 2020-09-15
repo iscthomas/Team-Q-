@@ -4,8 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Home</title>
-
         <!-- Styles -->
         <style>
             :root {
@@ -14,13 +12,13 @@
             }
 
             html, body {
-                background-image: url(images/12491.jpg);
+                background-image: url('{{asset('images/12491.jpg')}}');
                 background-size: 100vw;
-                background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 margin: 0;
+                overflow-x: hidden;
             }
 
             .flex-center {
@@ -72,6 +70,10 @@
                 margin-left: 90%;
             }
 
+            .subheading {
+                color: whitesmoke;
+            }
+
             .para > h3:hover {
                 color: var(--cblue);
             }
@@ -99,7 +101,7 @@
                 margin-bottom: 30px;
             }
 
-            .para {
+            .para, .panel {
                 width: 85vw;
                 height: 37vw;
                 padding-left: 25px;
@@ -112,6 +114,12 @@
                 color: whitesmoke;
                 position: relative;
                 z-index: 0;
+            }
+
+            .panel {
+                margin-top: 30px;
+                margin-left: 7vw;
+                height: 70vh;
             }
 
             .gametitle {
@@ -233,6 +241,45 @@
                 background-color: rgba(0, 172, 238, 0.3);
 
             }
+
+            /* GAMES PAGES */
+            .btn {
+                width: 10vw;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                float: left;
+                margin-left: 1vw;
+                margin-top: 3vh;
+                color: whitesmoke;
+                font-size: 2.8rem;
+            }
+
+            .games-btn, .groups-btn {
+                padding: 10px 20px;
+                margin-top: 3vh;
+                margin-right: 1vw;
+                float: right;
+                border-radius: 12px;
+                background-color: var(--cblue);
+                color: whitesmoke;
+            }
+
+            .games-btn:hover {
+                text-decoration: none;
+            }
+
+            table {
+                margin-top: 5vh;
+                margin-right: 1vw;
+            }
+
+            th, td {
+                font-size: 1rem;
+                background-color: rgba(20,20,20, 0.7);
+                color: whitesmoke;
+            }
         </style>
 
         <!-- CSRF Token -->
@@ -263,6 +310,7 @@
                     <a href="{{url('/games')}}">Players</a>
                     <a href="{{url('/groups')}}">Groups</a>
                     <a href="{{url('/scores')}}">Scores</a>
+                    <a href="{{url('/highscores/leaderboard')}}">HighScores</a>
                     <a id="navbarDropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
